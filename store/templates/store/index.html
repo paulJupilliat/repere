@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for product in products %}
+        <img src="{{ product.first_image.url }}" alt="image" style="height: 230px;">
+        <p> {{ product.product_name }}: le nom</p>
+        <p> {{ product.price }}: le prix </p>
+        <p> {{ product.describtion }}: sa description</p>   
+    {% endfor %}
+{% endblock %}
