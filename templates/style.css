@@ -1,0 +1,16 @@
+.image_article {
+    position: relative;
+  }
+  
+  .hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Masquer la deuxième image par défaut */
+    transition: opacity 0.3s ease; /* Ajouter une transition pour une animation douce */
+  }
+  
+  .image_article:hover .hover-image {
+    opacity: 1; /* Afficher la deuxième image au survol */
+  }
+  
