@@ -5,8 +5,18 @@
 <title>LE REPERE DES COPAINS</title>
 </head>
 <body>
-<h1>LE REPERE DES COPAINS</h1>
-<a href="index.php">Accueil</a>
+<a href="{% url 'index' %}">
+    <img src="media/products/logo.png" alt="LE REPERE DES COPAINS">
+</a>
+{% if  user.is_authenticated %}
+{{ user.username }}
+    <a href="{% url 'logout' %}">Se déconnecter</a>
+{% else %}
+    <a href="{% url 'signup' %}">S'inscrire</a>
+    <a href="{% url 'login' %}">Se connecter</a>
+{% endif %}
+
+
 {% block content %}
 {% endblock %}
 </body>

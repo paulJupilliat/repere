@@ -2,15 +2,18 @@
 {% block content %}
 {% for product in products %}
 <div style="background-color: grey;">
-  {% if product.stock == False %}
-    <p> OUT OF STOCK </p>
-  {% endif %}
+  
   <div class="image_article">
-    <img src="{{ product.first_image.url }}" alt="image" style="height: 230px;">
-    <img src="{{ product.second_image.url }}" alt="Deuxième image" class="hover-image" style="height: 230px">
+    <a href="{{ product.get_absolute_url }}">
+        <img src="{{ product.first_image.url }}" alt="image" style="height: 230px;">
+    </a>
+    
   </div>
   <p> {{ product.product_name }}: le nom</p>
   <p> {{ product.price }}: le prix </p>
+  {% if product.stock == False %}
+    <p> OUT OF STOCK </p>
+  {% endif %}
 </div>
 {% endfor %}
 {% endblock %}
