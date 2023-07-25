@@ -15,9 +15,14 @@
     <a href="{% url 'signup' %}">S'inscrire</a>
     <a href="{% url 'login' %}">Se connecter</a>
 {% endif %}
+{% if user.cart %}
+<a href="{% url 'cart' %}">Panier ({{ user.cart.orders.count }})</a>
+{% endif %}
 
 
 {% block content %}
+
+
 {% endblock %}
 </body>
 </html>

@@ -36,10 +36,10 @@ class Order(models.Model):
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
-    ordered = models.BooleanField(default=False)
+    
 
     def __str__(self):
-        return f"{self.product.product_name}({self.quantity})"
+        return f"{self.product.product_name}({self.quantity}) pour {self.user.username}"
     
 class Cart(models.Model):
     """
@@ -50,9 +50,26 @@ class Cart(models.Model):
     """
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
     orders = models.ManyToManyField(Order)
-    ordered = models.BooleanField(default=False)
-    ordered_date = models.DateTimeField(blank=True, null=True)
-
     
     def __str__(self):
         return self.user.username
+    
+class Commande(models.Model):
+    """
+    1 ou plusieurs orders avec leur quantité
+    le prix
+    le client
+    l'adresse de livraison
+    """
+    orders = models.ManyToManyField(Order)
+    adresse = models.CharField(max_length=200)
+    ordered = models.BooleanField(default=False)
+    ordered_date = models.DateTimeField(blank=True, null=True)
+    
+    def total_price(self):
+        return sum(order.product.price * order.quantity for order in self.orders.all())
+    def __str__(self):
+        
+            
+        return f" commande {self.orders.all()} pour {self.adresse} le {self.ordered_date} au prix de {self.total_price()} "
+    
