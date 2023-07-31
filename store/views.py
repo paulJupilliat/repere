@@ -15,6 +15,9 @@ def product_detail(request, slug):
     return render(request, 'store/detail.html', context={'product': product})
 
 def add_to_cart(request, slug):
+    # si je ne suis pas connecter, ca me renvoie sur la page de connexion
+    if not request.user.is_authenticated:
+        return render(request, 'accounts/login.html')
     #les différents cas de figure : deja un panier, pas de panier, particle existe deja dans son panier
     user = request.user
     product = get_object_or_404(Products, slug=slug)
