@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for product in products %}
+<div style="background-color: grey;">
+  
+  <div class="image_article">
+    <a href="{{ product.get_absolute_url }}">
+        <img src="{{ product.first_image.url }}" alt="image" style="height: 230px;">
+    </a>
+    
+  </div>
+  <p> {{ product.product_name }}: le nom</p>
+  <p> {{ product.price }}: le prix </p>
+  {% if product.stock == False %}
+    <p> OUT OF STOCK </p>
+  {% endif %}
+</div>
+{% endfor %}
+{% endblock %}
+
+

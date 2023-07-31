@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for order in orders %}
+<h2>Order {{ order.product.product_name }}</h2>
+<img src="{{ order.product.first_image.url }}" alt="image" style="height: 230px;">
+<p>{{ order.quantity }} dans le panier</p>
+{% endfor %}
+<a href="{% url 'delete_cart' %}">supprimer le panier</a>
+
+<!-- Lien vers la page de paiement -->
+<a href="{% url 'payment_page' %}">Payer</a>
+
+{% for order in cart.orders.all %}
+<h2>Order {{ order.product.product_name }}</h2>
+<img src="{{ order.product.first_image.url }}" alt="image" style="height: 230px;">
+<p>{{ order.quantity }} dans le panier</p>
+{% endfor %}
+
+<p> prix total : {{ prix }} $</p>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Order {{ order.product.product_name }}</h2>
+<img src="{{ order.product.first_image.url }}" alt="image" style="height: 230px;">
+
+<!-- Formulaire d'adresse de livraison -->
+<form id="deliveryForm">
+    <h3>Adresse de livraison:</h3>
+    <label for="name">Nom:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <label for="address">Adresse:</label><br>
+    <input type="text" id="address" name="address" required><br>
+    <label for="postalCode">Code postal:</label><br>
+    <input type="text" id="postalCode" name="postalCode" required><br>
+    <label for="city">Ville:</label><br>
+    <input type="text" id="city" name="city" required><br>
+    <label for="country">Pays:</label><br>
+    <input type="text" id="country" name="country" required><br>
+    <input type="submit" value="Confirmer l'adresse de livraison">
+</form>
+
+<!-- Bouton de paiement Paypal -->
+<div id="paypal-button-container" style="display:none;">
+    
+</div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AW_e5ERfDQ4iOITPYbvP5S5Jffu53Rk35_EMh-zLWoVVeYk2gXqYYVGUm5wgqyvnvvjBVp_KXmo0zGuD&currency=EUR"></script>
+<script>
+    // Ajoutez un gestionnaire d'événements pour le formulaire d'adresse de livraison
+    document.getElementById('deliveryForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Simulez une demande au serveur pour valider l'adresse de livraison
+        // Après la validation, affichez le bouton de paiement Paypal
+        document.getElementById('paypal-button-container').style.display = 'block';
+    });
+
+    paypal.Buttons({
+        style : {
+            color: 'blue'
+        },
+        createOrder: function(data, actions) {// la valeur dans les parametre et la fonction sera appeller avec $_SESSION['total']
+            return actions.order.create({
+                purchase_units:[{
+                  amount: {
+                      value: {{ prix }}
+                      
+                  }
+                }]
+            })
+        },
+        onApprove: function(data, actions) {
+            // This function captures the funds from the transaction.
+            return actions.order.capture().then(function(details) {
+                alert('Transaction completed by ' + details.payer.name.given_name);
+                // dans la bd mettre ordered a true
+
+                
+
+
+             
+            })
+        }
+    }).render('#paypal-button-container');
+</script>
+<p> prix total : {{ prix }} </p>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2> {{ product.product_name }}</h2>
+<h3> {{ product.price }}$ </h3>
+<img src="{{ product.first_image.url }}" alt="image" style="height: 530px;">
+<img src="{{ product.second_image.url }}" alt="Deuxième image" class="hover-image" style="height: 230px">
+<img src="{{ product.third_image.url }}" alt="Troisième image" class="hover-image" style="height: 230px">
+<p> {{ product.describtion }} </p>
+<p> <a href="{% url 'add_to_cart' product.slug %}"> Ajouter au panier </a> </p>
+
+{% endblock %}
