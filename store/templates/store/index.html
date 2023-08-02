@@ -1,21 +1,154 @@
 {% extends 'base.html' %}
-{% block content %}
-{% for product in products %}
-<div style="background-color: grey;">
-  
-  <div class="image_article">
-    <a href="{{ product.get_absolute_url }}">
-        <img src="{{ product.first_image.url }}" alt="image" style="height: 230px;">
-    </a>
-    
-  </div>
-  <p> {{ product.product_name }}: le nom</p>
-  <p> {{ product.price }}: le prix </p>
-  {% if product.stock == False %}
-    <p> OUT OF STOCK </p>
-  {% endif %}
-</div>
-{% endfor %}
+
+{% block additional_css %}
+<!-- Lien vers la feuille de style CSS spécifique pour cette page -->
+<link rel="stylesheet"  href="static/css/index.css">
+<link rel="stylesheet"  href="https://unpkg.com/css.gg@2.0.0/icons/css/shopping-bag.css">
 {% endblock %}
 
+{% block content %}
 
+<!-- Header -->
+<div id="header">
+  <!-- Menu burger -->
+  <div id="burger-menu">
+    <div id="burger-button">&#9776;</div>
+    <div id="burger-content" class="hidden">
+      {% if  user.is_authenticated %}
+          <p style="text-align : center">Bonjour {{ user.username }} </p>
+          <a href="{% url 'logout' %}"> Se déconnecter</a>
+      {% else %}
+          <a href="{% url 'signup' %}">S'inscrire</a>
+          <a href="{% url 'login' %}">Se connecter</a>
+      {% endif %}
+    </div>
+  </div>
+  <!-- La marque -->
+  <div id="marque">
+      <a class = "link-mark"href="{% url 'index' %}">La marque</a> <!-- a modifier la redirection pour aller sur la marque avec l'équipe etc-->
+  </div>
+  <!-- Le logo -->
+  <div class="annimation-container">
+    <a href="{% url 'index' %}" style="display: inline-block; vertical-align: middle;">
+        <img class="" src="/../static/img/marque.png" alt="LE REPERE DES COPAINS" style="width: 100%; padding-right : 15em ">
+    </a>
+  </div>
+  <!-- Nos produit -->
+  <div id="menu">
+    <a id="nos-produits" href="{% url 'index' %}">Nos produits</a> <!-- a modifier la dedirection pour aller sur les produits-->
+  </div>
+  <a href="{% url 'cart' %}" style="display: inline-block; margin: 0 3px; vertical-align: middle; text-decoration: none;">
+    <i class="gg-shopping-bag"></i>
+  </a>
+  <p id="rensignement-panier">{{ user.cart.orders.count }}</p>
+</div>
+
+
+
+<!-- Bandeau -->
+<div class='bandeau'>
+  <div class="anoncement" style="display: inline-block; vertical-align: middle;">
+    
+      <img class="" src="/../static/img/logo.png" alt="LE REPERE DES COPAINS" style="width:6%;">
+    
+    <p class="anoncement-text" style="display: inline-block; vertical-align: middle;margin-top : 10px">NEW DROP SEPTEMBER 12</p>
+    
+      <img class="" src="/../static/img/logo.png" alt="LE REPERE DES COPAINS" style="width: 6%;">
+    
+  </div>
+</div>
+
+
+
+<!-- Home page -->
+<div id="carousel" class="carousel">
+  <img src="../static/img/acceuil_collection2022.png" alt="LE REPERE DES COPAINS" />
+  <img src="../static/img/acceuil_collection2023.png" alt="LE REPERE DES COPAINS" />
+</div>
+<button id="prev"><</button>
+<button id="next">></button>
+
+
+
+
+
+
+
+<!-- Produit -->
+
+<div class="titre_div">
+<h1 id="titre">PRODUITS</h1>
+</div>
+<div class='articles'>
+  {% for product in products %}
+    <div class='article'>
+      <div class='img_article'>
+        <a href="{{ product.get_absolute_url }}">
+          <img src="{{ product.first_image.url }}" alt="image" class="image" style="height: 430px;">
+          <img src="{{ product.second_image.url }}" alt="image" class="image-hover" style="height: 430px; display: none;">
+        </a>
+      </div>
+      <h2>{{ product.product_name }}</h2>
+      <p>{{ product.price }} $</p>
+      {% if product.stock == False %}
+        <p>OUT OF STOCK</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+  {% comment %} // rotation logo
+  const articles = document.querySelectorAll('.article');
+
+  articles.forEach((article) => {
+    const image = article.querySelector('.image');
+    const imageHover = article.querySelector('.image-hover');
+  
+    article.addEventListener('mouseenter', () => {
+      image.style.display = 'none';
+      imageHover.style.display = 'block';
+    });
+  
+    article.addEventListener('mouseleave', () => {
+      image.style.display = 'block';
+      imageHover.style.display = 'none';
+    });
+  }); {% endcomment %}
+
+
+
+  //CAROUSEL
+  var carousel = document.getElementById('carousel');
+      var images = Array.from(carousel.children);
+      var index = 0;
+
+      document.getElementById('prev').onclick = function() {
+        images[index].style.display = 'none';
+        index = (index - 1 + images.length) % images.length;
+        images[index].style.display = 'block';
+      };
+
+      document.getElementById('next').onclick = function() {
+        images[index].style.display = 'none';
+        index = (index + 1) % images.length;
+        images[index].style.display = 'block';
+      };
+
+      // Only show the first image initially
+      for (var i = 1; i < images.length; i++) {
+        images[i].style.display = 'none';
+      }
+  
+  // Burger Menu
+  document.getElementById('burger-button').addEventListener('click', function() {
+    var content = document.getElementById('burger-content');
+    if (content.style.display === 'none' || content.style.display === '') {
+      content.style.display = 'block';
+    } else {
+      content.style.display = 'none';
+    }
+  });
+  
+</script>
+{% endblock %}

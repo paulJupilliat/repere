@@ -3,26 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>LE REPERE DES COPAINS</title>
-</head>
-<body>
-<a href="{% url 'index' %}">
-    <img src="media/products/logo.png" alt="LE REPERE DES COPAINS">
-</a>
-{% if  user.is_authenticated %}
-{{ user.username }}
-    <a href="{% url 'logout' %}">Se déconnecter</a>
-{% else %}
-    <a href="{% url 'signup' %}">S'inscrire</a>
-    <a href="{% url 'login' %}">Se connecter</a>
-{% endif %}
-{% if user.cart %}
-<a href="{% url 'cart' %}">Panier ({{ user.cart.orders.count }})</a>
-{% endif %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
-{% block content %}
-
+{% block additional_css %}
 
 {% endblock %}
+
+</head>
+<body>
+
+ 
+
+{% block content %}
+{% endblock %}
+
 </body>
+{% block style %}
+
+{% endblock %}
+
 </html>

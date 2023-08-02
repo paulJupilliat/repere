@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+
+{% load static %}
+
 {% block content %}
 {% for order in orders %}
 <h2>Order {{ order.product.product_name }}</h2>
