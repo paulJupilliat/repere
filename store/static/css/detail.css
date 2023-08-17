@@ -1,0 +1,139 @@
+p{
+    color: red;
+}
+
+
+
+/* animation pour le bandeau */
+@keyframes scroll {
+    0% {
+      transform: translateX(10%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  .anoncement {
+    display: inline-block;
+    position: relative;
+    padding-left: 40%;
+    animation: scroll 10s linear infinite;
+  }
+  
+  .anoncement {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  
+  
+  
+  
+  
+  /*navbar*/
+  
+  #burger-button {
+    font-size: 3em;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 17vw;
+  }
+  
+  #burger-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  #marque-menu, #produits-menu{
+    display: none;
+   
+  }
+  
+  #burger-content a {
+    color: black;
+    padding: 12px 15em;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-end;
+    flex-wrap: wrap ;
+  }
+  .gg-shopping-bag {
+    font-size: 234px; /* Taille de l'icône */
+    color: #000000; /* Couleur de l'icône (rouge) */
+  }
+  #rensignement-panier{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 0.7em;
+    
+  }
+  
+  
+  
+  a {
+    color: black;
+    text-decoration: none;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.2em;
+  
+  }
+  
+  /* Define the hover effect for the links */
+  a:hover {
+    color: #45B857;
+    text-decoration: none;
+  }
+  
+
+  #nos-produits{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.5em;
+    padding-right: 17vw;
+    padding-left: 17vw;
+  }
+  .link-mark{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.5em;
+    padding-right: 17vw;
+  }
+
+
+  @media only screen and (max-width: 1574px) {
+    #header {
+        justify-content: space-between;
+    }
+    
+    #burger-button, #burger-menu {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-right: 0px;
+    }
+    
+    .annimation-container {
+        flex: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #marque, #menu {
+        display: none; /* Cachez ces éléments car ils sont maintenant dans le burger menu */
+    }
+    #burger-content{
+      top: 70px;
+    }
+  }
+  

@@ -1,5 +1,43 @@
 {% extends 'base.html' %}
+{% block additional_css %}
+<!-- Lien vers la feuille de style CSS spécifique pour cette page -->
+<link rel="stylesheet"  href="static/css/detail.css">
+<link rel="stylesheet"  href="https://unpkg.com/css.gg@2.0.0/icons/css/shopping-bag.css">
+{% endblock %}
 {% block content %}
+
+<!-- Header -->
+<div id="header">
+    <!-- Menu burger -->
+    <!-- Menu burger -->
+  <div id="burger-menu">
+    <div id="burger-button">&#9776;</div>
+    <div id="burger-content" class="hidden">
+      {% if user.is_authenticated %}
+          <p style="text-align : center">Bonjour {{ user.username }} </p>
+          <a style="text-align : center" href="{% url 'logout' %}"> Se déconnecter</a>
+      {% else %}
+          <a style="text-align : center" href="{% url 'signup' %}">S'inscrire</a>
+          <a style="text-align : center" href="{% url 'login' %}">Se connecter</a>
+      {% endif %}
+      <a id="marque-menu"style="text-align : center " href="{% url 'index' %}">La marque</a>
+      <a id="produits-menu"style="text-align : center "  href="{% url 'index' %}">Nos produits</a>
+      
+    </div>
+  </div>
+  
+    <!-- La marque -->
+    <div id="marque">
+        <a class = "link-mark"href="{% url 'index' %}">La marque</a> <!-- a modifier la redirection pour aller sur la marque avec l'équipe etc-->
+    </div>
+    <!-- Le logo -->
+    <div class="annimation-container">
+      <a href="{% url 'index' %}" style="display: inline-block; vertical-align: middle;">
+          <img class="logo" src="/../static/img/marque.png" alt="LE REPERE DES COPAINS" style="width: 100%; ">
+      </a>
+    </div>
+
+
 <h2> {{ product.product_name }}</h2>
 <h3> {{ product.price }}$ </h3>
 <img src="{{ product.first_image.url }}" alt="image" style="height: 530px;">

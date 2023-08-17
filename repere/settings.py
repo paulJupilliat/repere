@@ -120,7 +120,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "repere",  # Assurez-vous de remplacer "votre_app" par le nom de votre application Django
+    BASE_DIR / "REPERE",  # Assurez-vous de remplacer "votre_app" par le nom de votre application Django
 ]
 
 

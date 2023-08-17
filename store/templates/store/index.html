@@ -11,18 +11,23 @@
 <!-- Header -->
 <div id="header">
   <!-- Menu burger -->
-  <div id="burger-menu">
-    <div id="burger-button">&#9776;</div>
-    <div id="burger-content" class="hidden">
-      {% if  user.is_authenticated %}
-          <p style="text-align : center">Bonjour {{ user.username }} </p>
-          <a href="{% url 'logout' %}"> Se déconnecter</a>
-      {% else %}
-          <a href="{% url 'signup' %}">S'inscrire</a>
-          <a href="{% url 'login' %}">Se connecter</a>
-      {% endif %}
-    </div>
+  <!-- Menu burger -->
+<div id="burger-menu">
+  <div id="burger-button">&#9776;</div>
+  <div id="burger-content" class="hidden">
+    {% if user.is_authenticated %}
+        <p style="text-align : center">Bonjour {{ user.username }} </p>
+        <a style="text-align : center" href="{% url 'logout' %}"> Se déconnecter</a>
+    {% else %}
+        <a style="text-align : center" href="{% url 'signup' %}">S'inscrire</a>
+        <a style="text-align : center" href="{% url 'login' %}">Se connecter</a>
+    {% endif %}
+    <a id="marque-menu"style="text-align : center " href="{% url 'index' %}">La marque</a>
+    <a id="produits-menu"style="text-align : center "  href="{% url 'index' %}">Nos produits</a>
+    
   </div>
+</div>
+
   <!-- La marque -->
   <div id="marque">
       <a class = "link-mark"href="{% url 'index' %}">La marque</a> <!-- a modifier la redirection pour aller sur la marque avec l'équipe etc-->
@@ -30,7 +35,7 @@
   <!-- Le logo -->
   <div class="annimation-container">
     <a href="{% url 'index' %}" style="display: inline-block; vertical-align: middle;">
-        <img class="" src="/../static/img/marque.png" alt="LE REPERE DES COPAINS" style="width: 100%; padding-right : 15em ">
+        <img class="logo" src="/../static/img/marque.png" alt="LE REPERE DES COPAINS" style="width: 100%; ">
     </a>
   </div>
   <!-- Nos produit -->
@@ -60,15 +65,17 @@
 
 
 
-<!-- Home page -->
+{% comment %} <!-- Home page -->
+<div class="home-page">
 <div id="carousel" class="carousel">
-  <img src="../static/img/acceuil_collection2022.png" alt="LE REPERE DES COPAINS" />
-  <img src="../static/img/acceuil_collection2023.png" alt="LE REPERE DES COPAINS" />
+  <img class = "img-carousel"src="../static/img/acceuil_collection2022.png" alt="LE REPERE DES COPAINS" />
+  <img class="img-carousel"src="../static/img/acceuil_collection2023.png" alt="LE REPERE DES COPAINS" />
+  <img class="img-carousel"src="../static/img/IMG_9911.png" alt="LE REPERE DES COPAINS" />
 </div>
 <button id="prev"><</button>
 <button id="next">></button>
 
-
+</div> {% endcomment %}
 
 
 
@@ -84,8 +91,8 @@
     <div class='article'>
       <div class='img_article'>
         <a href="{{ product.get_absolute_url }}">
-          <img src="{{ product.first_image.url }}" alt="image" class="image" style="height: 430px;">
-          <img src="{{ product.second_image.url }}" alt="image" class="image-hover" style="height: 430px; display: none;">
+          <img src="{{ product.first_image.url }}" alt="image" class="image" style="height: 400px;">
+          <img src="{{ product.second_image.url }}" alt="image" class="image-hover" style="height: 400px; display: none;">
         </a>
       </div>
       <h2>{{ product.product_name }}</h2>
@@ -98,7 +105,7 @@
 </div>
 
 <script>
-  {% comment %} // rotation logo
+  // deuxieme image tshirt
   const articles = document.querySelectorAll('.article');
 
   articles.forEach((article) => {
@@ -114,12 +121,12 @@
       image.style.display = 'block';
       imageHover.style.display = 'none';
     });
-  }); {% endcomment %}
+  });
 
 
 
   //CAROUSEL
-  var carousel = document.getElementById('carousel');
+  {% comment %} var carousel = document.getElementById('carousel');
       var images = Array.from(carousel.children);
       var index = 0;
 
@@ -139,7 +146,7 @@
       for (var i = 1; i < images.length; i++) {
         images[i].style.display = 'none';
       }
-  
+   {% endcomment %}
   // Burger Menu
   document.getElementById('burger-button').addEventListener('click', function() {
     var content = document.getElementById('burger-content');
